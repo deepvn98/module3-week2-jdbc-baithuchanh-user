@@ -46,6 +46,28 @@ public class UserService implements UserInterFace{
     }
 
     @Override
+    public List<User> showAllAscName() {
+        List<User> list = new ArrayList<>();
+        Connection connection = getconnection();
+        String sql = "select * from user order by name";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                User user = new User(id,name,email,country);
+                list.add(user);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
     public void create(User user) {
         Connection connection = getconnection();
         String sql = "insert into user(name, email, country) value (?,?,?)";
@@ -99,6 +121,29 @@ public class UserService implements UserInterFace{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id1 = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                user = new User(id1,name,email,country);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public User findByCountry(String country1) {
+        User user = null;
+        Connection connection = getconnection();
+        String sql = "select * from user where  country= ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,country1);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id1 = resultSet.getInt("id");

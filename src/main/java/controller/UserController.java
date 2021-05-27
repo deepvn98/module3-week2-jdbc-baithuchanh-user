@@ -59,7 +59,7 @@ public class UserController extends HttpServlet {
 
     private void showAllUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
-        List<User> list = userService.showAll();
+        List<User> list = userService.showAllAscName();
         request.setAttribute("list", list);
         requestDispatcher.forward(request, response);
     }
