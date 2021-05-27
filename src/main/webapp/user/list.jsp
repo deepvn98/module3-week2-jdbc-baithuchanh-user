@@ -23,6 +23,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
+                <th colspan="2">Action</th>
             </tr>
             <c:forEach items="${list}" var="list1">
                 <tr>
@@ -30,6 +31,9 @@
                     <td>${list1.getName()}</td>
                     <td>${list1.getEmail()}</td>
                     <td>${list1.getCountry()}</td>
+                    <td><a href="/UserController?action=remove&id=${list1.getId()}">Remove</a></td>
+                    <td><a href="/UserController?action=update&id=${list1.getId()}">Update</a></td>
+
                 </tr>
             </c:forEach>
 

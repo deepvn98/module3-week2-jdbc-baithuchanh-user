@@ -69,7 +69,7 @@ public class UserService implements UserInterFace{
             preparedStatement.setString(1,user.getName());
             preparedStatement.setString(2,user.getEmail());
             preparedStatement.setString(3,user.getCountry());
-            preparedStatement.setInt(4,user.getId());
+            preparedStatement.setInt(4,id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -92,11 +92,13 @@ public class UserService implements UserInterFace{
 
     @Override
     public User findById(int id) {
+        User user = null;
         Connection connection = getconnection();
         String sql = "select * from user where id = ?";
-        User user = null;
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id1 = resultSet.getInt("id");
