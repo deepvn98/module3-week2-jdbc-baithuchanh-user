@@ -12,6 +12,8 @@
     <title>Form show All</title>
 </head>
 <body>
+<a href="/UserController?action=create">Create User</a>
+<br><br>
 <form action="UserController" method="get">
     <fieldset>
         <legend>User List Form</legend>
